@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-* [#184](https://github.com/brightway-lca/brightway2-calc/issues/184): Turn off UMFPACK's iterative refinement in `bw2calc.utils.lu_solver`. Each solve with the factorization is about 3x faster with reference BLAS or OpenBLAS (on ecoinvent 3.12, 10.5 ms to 3.7 ms with reference BLAS), with results equal to rounding on ecoinvent (about 1e-11 relative on databases whose units span 12 or more orders of magnitude). This speeds up `lci(factorize=True)`, `redo_lci`, and `IterativeLCA`'s direct solves and forward error checks with UMFPACK. Thanks @simonvanlierde
+* [#184](https://github.com/brightway-lca/brightway2-calc/issues/184): `lu_solver` turns off UMFPACK's iterative refinement, so repeated solves are about 3x faster with reference BLAS or OpenBLAS.
 
 ## 3.1.0 (2026-10-18)
 

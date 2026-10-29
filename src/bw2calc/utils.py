@@ -137,12 +137,8 @@ def lu_solver(matrix: Any, copy: bool = True) -> Callable[[np.ndarray], np.ndarr
     ``matrix.tocsr().T`` is CSC without any conversion. Other formats are converted to CSR
     first.
 
-    UMFPACK's iterative refinement is turned off. On ecoinvent 3.12, one solve took 10.5 ms
-    with it and 3.7 ms without on reference BLAS, and 12.7 and 4.8 ms on conda-forge's
-    OpenBLAS, with the same score and a backward error still at rounding level; with MKL,
-    UMFPACK already takes no refinement step. With units badly scaled across a database
-    (12 or more orders of magnitude), scores can move by about 1e-11 relative. See
-    https://github.com/brightway-lca/brightway2-calc/issues/184.
+    UMFPACK's iterative refinement is off: it was most of each solve, and scores move by
+    rounding on ecoinvent and about 1e-11 relative with very badly scaled units; see #184.
 
     :param copy: UMFPACK reads the matrix again in each solve, so by default it gets a
         copy of ``matrix``. Pass ``False`` for a matrix which is never changed after this
